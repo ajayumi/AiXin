@@ -1,0 +1,47 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ajayumi.AiXin.App.Wpf.Themes.Default">
+
+    <DataTemplate x:Key="SearchView_ListBoxTpl">
+        <Border VerticalAlignment="Stretch" BorderBrush="{DynamicResource AccentColorBrush4}" BorderThickness="0,0,0,2">
+            <Grid Margin="0,2,0,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border VerticalAlignment="Stretch" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="2">
+                    <Image Source="{Binding Avatar, IsAsync=True}" Width="64" Height="64"></Image>
+                </Border>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="用户名："></Label>
+                        <Label Content="{Binding User.Name}" ToolTip="{Binding User.Name}" Foreground="{DynamicResource BlackColorBrush}"></Label>
+                        <Label Content="昵称：" Margin="5,0,0,0"></Label>
+                        <Label Content="{Binding User.NickName}" ToolTip="{Binding User.NickName}" Foreground="{DynamicResource BlackColorBrush}"></Label>
+                        <Label Content="性别：" Margin="5,0,0,0"></Label>
+                        <Label Content="{Binding GenderStr}" ToolTip="{Binding GenderStr}" Foreground="{DynamicResource BlackColorBrush}"></Label>
+                    </StackPanel>
+                    <Label Content="{Binding User.Signature}" ToolTip="{Binding User.Signature}" Foreground="{DynamicResource BlackColorBrush}" Grid.Row="1" VerticalAlignment="Stretch"></Label>
+                </Grid>
+
+                <Button Grid.Column="2" Style="{DynamicResource MetroFlatButton}" Command="{Binding AddCommand}" CommandParameter="{Binding User.Id}" ToolTip="添加" Margin="0,0,5,0" VerticalAlignment="Center" Width="48" Height="48">
+                    <Rectangle Width="24" Height="24" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_add}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+</ResourceDictionary>

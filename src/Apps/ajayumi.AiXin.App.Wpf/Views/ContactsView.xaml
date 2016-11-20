@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="ajayumi.AiXin.App.Wpf.Views.ContractView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ajayumi.AiXin.App.Wpf.Views"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Margin="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="txtSearch" FontSize="24" Margin="50,0,50,0"
+                 Controls:TextBoxHelper.ButtonCommand="{Binding SearchCommand}"
+                 Controls:TextBoxHelper.ButtonCommandParameter="{Binding ElementName=txtSearch, Path=Text}"
+                 Controls:TextBoxHelper.ClearTextButton="True"
+                 Controls:TextBoxHelper.UseFloatingWatermark="True"
+                 Controls:TextBoxHelper.Watermark="条件 用户名、昵称、备注、手机号、电子邮箱">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Return"
+                            Command="{Binding SearchCommand, Mode=OneWay}"
+                            CommandParameter="{Binding ElementName=txtSearch}" />
+            </TextBox.InputBindings>
+            <TextBox.Style>
+                <Style BasedOn="{StaticResource SearchMetroTextBox}" TargetType="{x:Type TextBox}">
+                    <Style.Triggers>
+                        <Trigger Property="Controls:TextBoxHelper.HasText" Value="True">
+                            <Setter Property="Controls:TextBoxHelper.ButtonContent" Value="r" />
+                            <!--<Setter Property="Controls:TextBoxHelper.ButtonContentTemplate" Value="{x:Null}" />-->
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
+        <ListBox Name="lboxImages" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ItemsSource="{Binding Contracts}" ItemTemplate="{DynamicResource ContractDataTemplate}" 
+                 ItemContainerStyle="{DynamicResource ContractListBoxItemStyle}"
+                 Style="{StaticResource VirtualisedMetroListBox}"
+                  Margin="50,5,50,0">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <!--<i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding MouseDoubleClickCommand}" CommandParameter="{Binding ElementName=lboxImages, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
+        </ListBox>
+    </Grid>
+</UserControl>

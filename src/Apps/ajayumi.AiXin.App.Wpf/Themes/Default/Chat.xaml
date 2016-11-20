@@ -1,0 +1,124 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <DataTemplate x:Key="ChatView_ListBoxTpl">
+        <Grid Margin="0,2,0,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border VerticalAlignment="Stretch" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="2">
+                <Image Source="{Binding Avatar}" Width="64" Height="64"></Image>
+            </Border>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding CustomName}" ToolTip="{Binding CustomName}" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" TextTrimming="WordEllipsis" Margin="5,0,0,0"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding User.Signature}" ToolTip="{Binding User.Signature}" TextWrapping="NoWrap" TextTrimming="WordEllipsis" VerticalAlignment="Center" Margin="5,5,0,5" />
+            </Grid>
+
+            <Ellipse Width="10" Height="10" Fill="Red" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="5" Visibility="{Binding UnReadedVisibility}"></Ellipse>
+
+            <!--<Label Content="{Binding Remark}" ToolTip="{Binding Remark}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center"></Label>-->
+
+            <!--<Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Width="15" Height="15" Fill="#CCCCCC" ToolTip="关闭"></Rectangle>-->
+            <!--<Button Width="12" Height="12" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-6,0,0" Padding="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="PART_Border" CornerRadius="0" BorderBrush="#CCCCCC" BorderThickness="0" Width="12" Height="12" Margin="0">
+                                <Path x:Name="PART_Path" Data="M6,6 L6,6 10,10 M10,6 L10,6 6,10" Fill="{DynamicResource AccentColorBrush2}" Stretch="Fill" Stroke="{DynamicResource AccentColorBrush2}" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+    
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" TargetName="PART_Border">
+                                        <Setter.Value>
+                                            <SolidColorBrush Color="#00CCCCCC"></SolidColorBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Stroke" TargetName="PART_Path" Value="{DynamicResource AccentColorBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="UIElement.Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="3" Color="#CCCCCC" Direction="0" Opacity="0.6" RenderingBias="Performance" ShadowDepth="0" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>-->
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ReceivedMsgsTemplate">
+        <Grid Margin="2">
+            <Grid Visibility="{Binding ThireVisibility}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Border VerticalAlignment="Top" Grid.RowSpan="2" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
+                    <Image Source="{Binding FromUserAvatar}" Width="32" Height="32"></Image>
+                </Border>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Label Content="{Binding FromUser.User.Name}" ToolTip="{Binding FromUser.User.Name}" Foreground="{DynamicResource BlackColorBrush}" ></Label>
+                    <Label Content="{Binding CreationDTime}" Foreground="{DynamicResource BlackColorBrush}" ></Label>
+                </StackPanel>
+                <Border  Grid.Column="1" Grid.Row="1" 
+                         BorderBrush="{DynamicResource AccentColorBrush}" 
+                         BorderThickness="1" 
+                         CornerRadius="0,4,4,4"
+                         HorizontalAlignment="Left"
+                         Margin="5,0,0,0">
+                    <TextBlock Text="{Binding Content}" Foreground="{DynamicResource BlackColorBrush}" 
+                               TextWrapping="Wrap" Margin="5"></TextBlock>
+                </Border>
+            </Grid>
+
+            <Grid Visibility="{Binding OwnVisibility}" Margin="0,0,5,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Label Content="{Binding FromUser.User.Name}" ToolTip="{Binding FromUser.User.Name}" Foreground="{DynamicResource BlackColorBrush}"></Label>
+                    <Label Content="{Binding CreationDTime}" Foreground="{DynamicResource BlackColorBrush}" ></Label>
+                </StackPanel>
+                <Border Grid.Row="1" BorderBrush="{DynamicResource AccentColorBrush}" 
+                        BorderThickness="1" 
+                        CornerRadius="4,0,4,4"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,5,0">
+                    <TextBlock Text="{Binding Content}" Foreground="{DynamicResource BlackColorBrush}"
+                               HorizontalAlignment="Right" TextWrapping="Wrap"
+                               Margin="5"></TextBlock>
+                </Border>
+
+                <Border VerticalAlignment="Top" Grid.Column="1" Grid.RowSpan="2" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1">
+                    <Image Source="{Binding FromUserAvatar}" Width="32" Height="32"></Image>
+                </Border>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

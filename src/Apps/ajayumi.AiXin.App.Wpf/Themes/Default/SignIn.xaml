@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ajayumi.AiXin.App.Wpf.Themes.Default">
+    
+    <Style x:Key="btnSignIn" TargetType="Button" BasedOn="{StaticResource AccentedSquareButtonStyle}" >
+        <Setter Property="FontSize" Value="{StaticResource ContentFontSize}"/>
+    </Style>
+
+</ResourceDictionary>

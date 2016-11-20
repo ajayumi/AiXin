@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="ajayumi.AiXin.App.Wpf.Views.ProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ajayumi.AiXin.App.Wpf.Views"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Column="1" Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="{StaticResource GridRowMargin}">
+                    <Border VerticalAlignment="Stretch" BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="2">
+                        <Image Source="{Binding Avatar}" Width="64" Height="64"></Image>
+                    </Border>
+                    <Button Style="{DynamicResource MetroFlatButton}" Content="更换头像" Command="{Binding ChangeAvatarCommand}"></Button>
+                </StackPanel>
+
+                <Label Content="用户名：" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Name,Mode=OneWay}" Style="{DynamicResource MetroTextBox}" IsEnabled="False" Margin="{StaticResource GridRowMargin}"></TextBox>
+
+                <Label Content="昵称：" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NickName}" Style="{DynamicResource MetroTextBox}" Margin="{StaticResource GridRowMargin}"></TextBox>
+
+                <Label Content="真实姓名：" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding RealName}" Style="{DynamicResource MetroTextBox}" Margin="{StaticResource GridRowMargin}"></TextBox>
+
+                <Label Content="电子邮箱：" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Email}" Style="{DynamicResource MetroTextBox}" Margin="{StaticResource GridRowMargin}"></TextBox>
+
+                <Label Content="手机号码：" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Telphone}" Style="{DynamicResource MetroTextBox}" Margin="{StaticResource GridRowMargin}"></TextBox>
+
+                <Label Content="QQ：" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding QQ}" Style="{DynamicResource MetroTextBox}" Margin="{StaticResource GridRowMargin}"></TextBox>
+
+                <Label Content="微信号：" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding WeChat}" Style="{DynamicResource MetroTextBox}" Margin="{StaticResource GridRowMargin}"></TextBox>
+
+                <Label Content="个性签名：" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding Signature}" Style="{DynamicResource MetroTextBox}" Margin="{StaticResource GridRowMargin}"></TextBox>
+
+                <Label Content="嗜好：" Grid.Row="9" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Grid.Column="1" Grid.Row="9" Text="{Binding Hobby}" Style="{DynamicResource MetroTextBox}" Margin="{StaticResource GridRowMargin}"></TextBox>
+
+                <Label Content="住址：" Grid.Row="10" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Grid.Column="1" Grid.Row="10" Text="{Binding Address}" Style="{DynamicResource MetroTextBox}" Margin="{StaticResource GridRowMargin}"></TextBox>
+
+                <Label Content="出生日期：" Grid.Row="11" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <!--<TextBox Grid.Column="1" Grid.Row="11" Text="{Binding Address}" Style="{DynamicResource MetroTextBox}" Margin="{StaticResource GridRowMargin}"></TextBox>-->
+                <DatePicker Grid.Column="1" Grid.Row="11" Margin="{StaticResource GridRowMargin}"
+                        Controls:TextBoxHelper.UseFloatingWatermark="True"
+                        Controls:TextBoxHelper.Watermark="选择日期" 
+                        SelectedDate="{Binding Birthday}"/>
+
+                <Label Content="性别：" Grid.Row="12" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <StackPanel Grid.Column="1" Grid.Row="12" Orientation="Horizontal" Margin="{StaticResource GridRowMargin}">
+                    <RadioButton Margin="0,0,5,0"
+                             Content="男" IsChecked="{Binding MaleChecked}" />
+                    <RadioButton Margin="0,0,5,0"
+                             Content="女" IsChecked="{Binding FemaleChecked}" />
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="5">
+            <Button Style="{DynamicResource AccentedSquareButtonStyle}" Command="{Binding SaveCommand}">保存</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

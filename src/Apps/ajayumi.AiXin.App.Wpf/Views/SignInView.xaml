@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="ajayumi.AiXin.App.Wpf.Views.SignInView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ajayumi.AiXin.App.Wpf"
+             xmlns:cpt="clr-namespace:ajayumi.AiXin.Infrastructure.Wpf;assembly=ajayumi.AiXin.Infrastructure.Wpf"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             mc:Ignorable="d" 
+             d:DesignHeight="480" d:DesignWidth="600">
+    <UserControl.Resources>
+        <Storyboard x:Key="OnLoaded1">
+            <DoubleAnimation Storyboard.TargetName="myDropShadowEffect"
+                             Storyboard.TargetProperty="BlurRadius" 
+                             RepeatBehavior="Forever" AutoReverse="True"
+                             From="5" To="40" BeginTime="00:00:00" Duration="0:0:5" />
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource OnLoaded1}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="1" Grid.Row="1" Width="400" 
+                BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1"
+                Background="{DynamicResource WhiteColorBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.ColumnSpan="3" VerticalContentAlignment="Center">
+                    <Border Background="{DynamicResource AccentColorBrush}" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
+                        <Label Content="{Binding AppName}" Foreground="{DynamicResource WhiteColorBrush}" FontSize="24" Padding="10,2,10,5"/>
+                    </Border>
+                    <Label.RenderTransform>
+                        <TranslateTransform X="0" Y="-25"/>
+                    </Label.RenderTransform>
+                    <Label.Effect>
+                        <DropShadowEffect BlurRadius="3" Color="{DynamicResource AccentColor4}" ShadowDepth="0"></DropShadowEffect>
+                    </Label.Effect>
+                </Label>
+
+                <TextBox Grid.Column="1" Grid.Row="1" InputMethod.IsInputMethodEnabled="False"
+                         Controls:TextBoxHelper.UseFloatingWatermark="True" 
+                         Controls:TextBoxHelper.Watermark="帐号" 
+                         Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{DynamicResource MetroTextBox}"/>
+
+                <PasswordBox Grid.Column="1" Grid.Row="3" 
+                             Controls:TextBoxHelper.UseFloatingWatermark="True" 
+                             Controls:TextBoxHelper.Watermark="密码"
+                             cpt:PasswordBoxHelper.Password="{Binding Password}">
+                    <PasswordBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SignInCommand}" />
+                    </PasswordBox.InputBindings>
+                </PasswordBox>
+
+                <Button Grid.Column="1" Grid.Row="5" Content="登  录" 
+                        Style="{DynamicResource btnSignIn}" Command="{Binding SignInCommand}" />
+                <Button Grid.Column="1" Grid.Row="7" Content="未有账号" 
+                        Style="{DynamicResource MetroFlatButton}" Command="{Binding SwitchSignUpCommand}" />
+            </Grid>
+
+            <Border.Effect>
+                <DropShadowEffect x:Name="myDropShadowEffect" Color="{DynamicResource AccentColor4}" ShadowDepth="1"></DropShadowEffect>
+            </Border.Effect>
+        </Border>
+
+        <cpt:WaitingPanel Grid.Column="1" Grid.Row="1" Visibility="{Binding WaitingPanelVM.WaitingVisibility}"></cpt:WaitingPanel>
+
+        <Label Grid.ColumnSpan="3" Grid.RowSpan="3" VerticalContentAlignment="Center" Padding="10"
+               HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+               Background="{Binding NotifyMsgVM.Background}" 
+               Foreground="{Binding NotifyMsgVM.Foreground}"
+               Visibility="{Binding NotifyMsgVM.Visibility}"
+               Content="{Binding NotifyMsgVM.Msg}" 
+               ToolTip="{Binding NotifyMsgVM.Msg}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{Binding NotifyMsgVM.NotifyMsgClickCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Label>
+    </Grid>
+</UserControl>

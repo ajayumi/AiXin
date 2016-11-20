@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{07EC5C3D-8948-4F3E-B840-5762B4FF0E4A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ajayumi.AiXin.Server.Chat</RootNamespace>
+    <AssemblyName>ajayumi.AiXin.Server.Chat</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SuperSocket.Common, Version=1.6.6.1, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\SuperSocket\SuperSocket.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Facility, Version=1.6.6.1, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\SuperSocket\SuperSocket.Facility.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketBase, Version=1.6.6.1, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\SuperSocket\SuperSocket.SocketBase.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketService">
+      <HintPath>..\..\..\References\SuperSocket\SuperSocket.SocketService.exe</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\Dependencies\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Commands\DownloadAvatar.cs" />
+    <Compile Include="Commands\UploadAvatar.cs" />
+    <Compile Include="Commands\EditProfile.cs" />
+    <Compile Include="Commands\GetContacts.cs" />
+    <Compile Include="Commands\SaveContacts.cs" />
+    <Compile Include="Commands\SearchUser.cs" />
+    <Compile Include="Commands\OnlineList.cs" />
+    <Compile Include="Commands\SignUp.cs" />
+    <Compile Include="Commands\SignIn.cs" />
+    <Compile Include="Commands\Talk.cs" />
+    <Compile Include="Filters\LoggedInValidationFilter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ChatReceiveFilter.cs" />
+    <Compile Include="ChatServer.cs" />
+    <Compile Include="ChatSession.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\ajayumi.AiXin.Model\ajayumi.AiXin.Model.csproj">
+      <Project>{a22ab576-fb0d-416e-9ddc-2b8f8203f818}</Project>
+      <Name>ajayumi.AiXin.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Bizs\ajayumi.AiXin.BizManager\ajayumi.AiXin.BizManager.csproj">
+      <Project>{df65ee15-4518-4d12-9d0a-50dedc4d1c0d}</Project>
+      <Name>ajayumi.AiXin.BizManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Bizs\ajayumi.AiXin.IBiz\ajayumi.AiXin.IBiz.csproj">
+      <Project>{F37A2BF0-A55C-42BE-845E-4BAB7C643271}</Project>
+      <Name>ajayumi.AiXin.IBiz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructures\ajayumi.AiXin.Infrastructure.Json\ajayumi.AiXin.Infrastructure.Json.csproj">
+      <Project>{6ab9fd17-5dc8-484c-814f-fc1c1d373499}</Project>
+      <Name>ajayumi.AiXin.Infrastructure.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructures\ajayumi.AiXin.Infrastructure.SuperSocket\ajayumi.AiXin.Infrastructure.SuperSocket.csproj">
+      <Project>{cf59025f-0788-423f-a5a1-6d4a292e3a3b}</Project>
+      <Name>ajayumi.AiXin.Infrastructure.SuperSocket</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructures\ajayumi.AiXin.Infrastructure\ajayumi.AiXin.Infrastructure.csproj">
+      <Project>{5946a376-6d35-482e-8400-a89e0b47d7a4}</Project>
+      <Name>ajayumi.AiXin.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"  ToolsVersion="14.0" DefaultTargets="Run">
+
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <appname>AiXin</appname>
+    <appVersion>4.6.0</appVersion>
+    <outputdir>Publisher\$(appname)_$(appVersion)</outputdir>
+    <outputdir2>Publisher\$(appname)_Server_$(appVersion)</outputdir2>
+    <outputdir3>Publisher\$(appname)_ServerManagement_$(appVersion)</outputdir3>
+    <buildDir>src\Apps\ajayumi.AiXin.App.Wpf\bin\$(Configuration)</buildDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SolutionToBuild Include=".\src\ajayumi.AiXin.sln">
+      <DontClean/>
+    </SolutionToBuild>
+	
+    <appFiles Include="$(buildDir)\*" />
+    <sqlite64Files Include="src\Datas\ajayumi.AiXin.Data.SqliteDao\bin\$(Configuration)\x64\*" />
+    <sqlite86Files Include="src\Datas\ajayumi.AiXin.Data.SqliteDao\bin\$(Configuration)\x86\*" />
+  </ItemGroup>
+
+  <Target Name="Run">
+    <CallTarget Targets="Compile" />
+    <CallTarget Targets="Wpf_Deploy" />
+    <CallTarget Targets="Server_Deploy" />
+    <CallTarget Targets="ServerManagement_Deploy" />
+  </Target>
+
+  <Target Name="Clean">
+    <ItemGroup>
+      <BinFiles Include="bin\*.*" />
+    </ItemGroup>
+    <Delete Files="@(BinFiles)" />
+    <RemoveDir Directories="$(outputdir)"/>
+    <RemoveDir Directories="$(outputdir2)"/>
+    <RemoveDir Directories="$(outputdir3)"/>
+  </Target>
+
+  <Target Name="Compile" DependsOnTargets="Clean">
+    <Exec Command="nuget.exe restore @(SolutionToBuild)" />
+    <MSBuild Projects="@(SolutionToBuild)" Properties="Configuration=$(Configuration);Version=$(TargetFrameworkVersion);" />
+  </Target>
+
+  <Target Name="Init">
+    <MakeDir Directories="$(outputdir)"/>
+    <MakeDir Directories="$(outputdir2)"/>
+    <MakeDir Directories="$(outputdir3)"/>
+</Target>
+
+  <Target Name="Wpf_Deploy" DependsOnTargets="Init">
+    <Copy SourceFiles="@(appFiles)" DestinationFolder="$(outputdir)" />
+  </Target>
+
+  <Target Name="Server_Deploy">
+    <ItemGroup>
+      <app2Files Include="src\Servers\ajayumi.AiXin.Server.Host.Console\bin\$(Configuration)\*" />
+    </ItemGroup>
+
+    <RemoveDir Directories="$(outputdir2)"/>
+    <MakeDir Directories="$(outputdir2)"/>
+
+    <Copy SourceFiles="@(app2Files)" DestinationFolder="$(outputdir2)" />
+    <Exec Command="copy src\Servers\ajayumi.AiXin.Server.Host.Console\bin\$(Configuration)\ajayumi.AiXin.Server.Host.Console.exe.config $(outputdir2)\SuperSocket.SocketService.exe.config" />
+    <Copy SourceFiles="@(sqlite64Files)" DestinationFolder="$(outputdir2)\x64" />
+    <Copy SourceFiles="@(sqlite86Files)" DestinationFolder="$(outputdir2)\x86" />
+  </Target>
+
+  <Target Name="ServerManagement_Deploy" DependsOnTargets="Compile">
+    <ItemGroup>
+      <SSMgtClientFiles Include="Dependencies\ServerManagement\*" />
+    </ItemGroup>
+    <Message Text="发布$(appname)项目的服务管理系统"/>
+    <Copy SourceFiles="@(SSMgtClientFiles)" DestinationFolder="$(outputdir3)\" />
+  </Target>
+</Project>

@@ -1,0 +1,60 @@
+﻿{
+  "components": [
+    {
+      "type": "ajayumi.AiXin.Biz.AuthBiz, ajayumi.AiXin.Biz",
+      "services": [
+        {
+          "type": "ajayumi.AiXin.IBiz.IAuthBiz, ajayumi.AiXin.IBiz"
+        }
+      ]
+    },
+    {
+      "type": "ajayumi.AiXin.Biz.UserBiz, ajayumi.AiXin.Biz",
+      "services": [
+        {
+          "type": "ajayumi.AiXin.IBiz.IUserBiz, ajayumi.AiXin.IBiz"
+        }
+      ]
+    },
+    {
+      "type": "ajayumi.AiXin.Biz.ContactsBiz, ajayumi.AiXin.Biz",
+      "services": [
+        {
+          "type": "ajayumi.AiXin.IBiz.IContactsBiz, ajayumi.AiXin.IBiz"
+        }
+      ]
+    },
+    {
+      "type": "ajayumi.AiXin.Biz.MessageBiz, ajayumi.AiXin.Biz",
+      "services": [
+        {
+          "type": "ajayumi.AiXin.IBiz.IMessageBiz, ajayumi.AiXin.IBiz"
+        }
+      ]
+    },
+    {
+      "type": "ajayumi.AiXin.Data.SqliteDao.UserDao, ajayumi.AiXin.Data.SqliteDao",
+      "services": [
+        {
+          "type": "ajayumi.AiXin.Data.IDao.IUserDao, ajayumi.AiXin.Data.IDao"
+        }
+      ]
+    },
+    {
+      "type": "ajayumi.AiXin.Data.SqliteDao.ContactsDao, ajayumi.AiXin.Data.SqliteDao",
+      "services": [
+        {
+          "type": "ajayumi.AiXin.Data.IDao.IContactsDao, ajayumi.AiXin.Data.IDao"
+        }
+      ]
+    },
+    {
+      "type": "ajayumi.AiXin.Data.SqliteDao.MessageDao, ajayumi.AiXin.Data.SqliteDao",
+      "services": [
+        {
+          "type": "ajayumi.AiXin.Data.IDao.IMessageDao, ajayumi.AiXin.Data.IDao"
+        }
+      ]
+    }
+  ]
+}
